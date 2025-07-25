@@ -1,0 +1,25 @@
+Prompt for Claude Sonnet 4 to transcribe page images of the Rolls of Hugh de Welles
+
+
+I have a series of page images from a book that was published in 1909. Because of the older font, previous OCR has been inaccurate. I will be uploading page images in groups so you can OCR them. You should follow these instructions when I do so.
+
+Transcribe the text on each page, making sure to do so accurately and without trying to correct any spelling or grammar except as instructed by me.
+
+When a dash appears at the end of a line of text, it is being used to break a word to fit a line break. In that case, do not include the dash or a following white space; instead, join the word back together in your output.
+
+If at the bottom of the page, on a line by itself, there is a letter P or Q, possibly followed by a space and a number, that should be omitted from the transcription.
+
+A line that contains only the word ANNUS followed by a Roman numeral and a period should be wrapped in these tags: <head> </head> with the word and Roman numeral between the tags. Sometimes the number is spelled out in Latin instead of being a Roman numeral; treat these the same way.
+
+The top of each page image includes a header with a few words of text and a page number. Delete the text of the header, but keep the page number. The page number will be preserved as part of an XML tag like this: <page n="x"/> except that the page number will take the place of the x.
+
+For the most part, the text of the pages consists of alternating English and Latin paragraphs. These should be wrapped in XML tags. The English paragraphs are surrounded by square brackets [ ]. Replace the starting square bracket with the tag <summary> and the closing square bracket with the tag </summary/>
+
+The Latin paragraphs begin with one or more words in all caps. Surround each Latin paragraph with the following XML tags: <text> at the beginning, and </text> at the end. If there is Latin text, followed by a <page> tag, followed immediately by more Latin text, the <page> tag should not be treated as the end of the paragraph, though bland lines should precede and follow it; keep reading to the end of that section of Latin text, and place the </text> closing tag there.
+
+Some pages have footnotes. If there is a footnote, locate the <summary> or <text> above on the same page to which the footnote relates, based on the superscript number. Place the text of the footnote wrapped in <note> </note> element tags just inside the closing </summary> or </text> tag ending the section to which the footnote relates. The superscript number in the text should be placed in square brackets [ ]. The superscript number at the beginning of the footnote itself should be placed in the <note> tag as an attribute value like this: <note n="1"> (replacing the 1 with the number appropriate to the footnote, if that number is not already 1).
+
+Return the text itself as an artifact and not in the main conversation of our chat.
+
+When you return the finished text, make sure the pages are in the correct order by page number. When I upload a new set of page images, process them in the same way as the previous pages add them to the output. If a new set of pages begins in the middle of a Latin paragraph, treat the <page> tag as instructed above. If I upload the same page twice, ignore the duplicate page. Inform me if there is a page missing from the sequence.
+
